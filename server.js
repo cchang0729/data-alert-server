@@ -40,7 +40,7 @@ const requestHandler = function(request, response) {
                     }
                     else {
                         rmdir(defaultDir, console.log);
-                        var folderSize = ((size / 1024 / 1024).toFixed(3) + ' Mb');
+                        var folderSize = '{"size":'+size+'}'; //stringify sending format
                         resolve(folderSize);
                     }
                 });
