@@ -1,0 +1,20 @@
+{
+  "name": "DataAlertServer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "get-folder-size": "^1.0.0",
+    "http": "0.0.0",
+    "underscore": "^1.8.3",
+    "website-scraper": "^2.2.2"
+  }
+}
