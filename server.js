@@ -4,7 +4,7 @@
 
 //Server implementation
 const http = require('http');
-const scrape = require('website-scraper');
+const scrape = require("website-scraper");
 const rmdir = require('rimraf');
 var getSize = require('get-folder-size');
 
@@ -19,10 +19,9 @@ const requestHandler = function(request, response) {
     //get json data, parse, and send back size
     request.on('data', function(chunk){
         body.push(chunk);
-    }).on('end', function(){
-        body = Buffer.concat(body).toString(); //receive all data to string
-
-        var url = JSON.parse(body)[keyURL];
+    }).on("end", function(){
+        var postData = Buffer.concat(body).toString(); //receive all data to string
+        var url = JSON.parse(postData)[keyURL];
         console.log(url);
         //parse, and give it to option
         var options = {
@@ -37,11 +36,10 @@ const requestHandler = function(request, response) {
                 getSize(options.directory, function(error, size){
                     if(error){
                         reject(Error(error));
-                    }
-                    else {
+                    } else {
                         rmdir(defaultDir, console.log);
-                        var folderSize = '{"size":'+size+'}'; //stringify sending format
-                        resolve(folderSize);
+                        var data = '{"size":'+size+',"timestamp:"'+Date.now()+'}'; //stringify sending format
+                        resolve(data);
                     }
                 });
             });
