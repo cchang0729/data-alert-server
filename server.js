@@ -21,8 +21,13 @@ const requestHandler = function(request, response) {
         body.push(chunk);
     }).on("end", function(){
         var postData = Buffer.concat(body).toString(); //receive all data to string
-        var url = JSON.parse(postData)[keyURL];
-        console.log(url);
+        //parse
+        try {
+            var url = JSON.parse(postData)[keyURL];
+        } catch(e) {
+            return console.error(e);
+        }
+
         //parse, and give it to option
         var options = {
             urls: url,
@@ -39,6 +44,7 @@ const requestHandler = function(request, response) {
                     } else {
                         rmdir(defaultDir, console.log);
                         var data = '{"size":'+size+',"timestamp:"'+Date.now()+'}'; //stringify sending format
+
                         resolve(data);
                     }
                 });
